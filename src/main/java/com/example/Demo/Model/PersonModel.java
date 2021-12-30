@@ -2,9 +2,9 @@ package com.example.Demo.Model;
 
 import com.example.Demo.DTO.PersonDTO;
 
-import lombok.ToString;
+import lombok.Data;
 
-public @ToString class PersonModel {
+public @Data class PersonModel {
 
 	public long Id;
 	public String FirstName;
@@ -32,5 +32,9 @@ public @ToString class PersonModel {
 		Country = persondto.Country;
 		Address = persondto.Address;
 		Profilepic = persondto.Profilepic;
+	}
+	
+	public void UpdatePerson(PersonDTO persondto) {
+		this.UpdatePerson(persondto);
 	}
 }
