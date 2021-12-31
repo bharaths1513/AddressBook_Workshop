@@ -26,6 +26,12 @@ public class PersonController {
 	@Autowired
 	private IPersonService service;
 	
+	/**
+	 * Adding person to AddressBook
+	 * @param persondto
+	 * @return : Person Data Which is Added
+	 */
+	
 	@PostMapping("/Add")
 	public ResponseEntity<ResponseDTO> AddPerson(@RequestBody PersonDTO persondto){
 		PersonModel model = null;
@@ -33,6 +39,11 @@ public class PersonController {
 		ResponseDTO respDTO = new ResponseDTO("Added Person ", model);
 		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);
 	}
+	
+	/**
+	 * Finding All Data Which is Added
+	 * @return : List of Persons Data
+	 */
 	
 	@GetMapping("/FindAll")
 	public ResponseEntity<ResponseDTO> GetAddress(){
@@ -42,6 +53,13 @@ public class PersonController {
 		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);
 	}
 	
+	
+	/**
+	 * Finding Person Data With Id
+	 * @param Id
+	 * @return : Data Which is Found By Id
+	 */
+	
 	@GetMapping("/Find/{Id}")
 	public ResponseEntity<ResponseDTO> FindAddressById(@PathVariable("Id")long Id){
 		PersonModel model = null;
@@ -49,6 +67,13 @@ public class PersonController {
 		ResponseDTO respDTO = new ResponseDTO("Getting Address By Id Successful",model);
 		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);
 	}
+	
+	/**
+	 * Updating the Person Data with Id
+	 * @param Id : Passed as Path Variable 
+	 * @param persondto 
+	 * @return : Updated Person Data
+	 */
 	
 	@PutMapping("/Update/{Id}")
 	public ResponseEntity<ResponseDTO> UpdateAddress(@PathVariable("Id") long Id,  
@@ -58,6 +83,12 @@ public class PersonController {
 		ResponseDTO respDTO = new ResponseDTO("Updating Address Successful",model);
 		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);
 	}
+	
+	/**
+	 * Deleting The Person Data By Id
+	 * @param Id
+	 * @return : Deleted Person Id
+	 */
 	
 	@DeleteMapping("/Delete/{Id}")
 	public ResponseEntity<ResponseDTO> DeleteAddress(@PathVariable("Id") long Id){
