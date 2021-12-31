@@ -1,6 +1,8 @@
 package com.example.Demo.DTO;
 
-public class PersonDTO {
+import lombok.ToString;
+
+public @ToString class PersonDTO {
 
 	public long Id;
 	public String FirstName;
