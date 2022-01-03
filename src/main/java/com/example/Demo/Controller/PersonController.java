@@ -20,7 +20,7 @@ import com.example.Demo.Model.PersonModel;
 import com.example.Demo.Service.IPersonService;
 
 @RestController
-@RequestMapping("/AddressBook")
+@RequestMapping("/Person")
 public class PersonController {
 
 	@Autowired
@@ -80,6 +80,7 @@ public class PersonController {
 			@RequestBody PersonDTO persondto){
 		PersonModel model = null;
 		model = service.UpdatePerson(Id, persondto);
+		System.out.println(model);
 		ResponseDTO respDTO = new ResponseDTO("Updating Address Successful",model);
 		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);
 	}

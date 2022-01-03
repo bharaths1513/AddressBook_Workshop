@@ -1,6 +1,7 @@
 package com.example.Demo.Service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +53,7 @@ public class PersonService implements IPersonService {
 	@Override
 	public PersonModel UpdatePerson(long Id, PersonDTO persondto) {
 		PersonModel model = this.GetPersonByID(Id);
-		model.UpdatePerson(persondto);
+		model.UpdatePersonModel(persondto);
 		return personrepo.save(model);
 	}
 	

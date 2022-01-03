@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.example.Demo.DTO.PersonDTO;
@@ -12,9 +13,10 @@ import com.example.Demo.DTO.PersonDTO;
 import lombok.Data;
 
 @Entity
-@Table(name = "address_book")
+@Table(name = "person")
 public @Data class PersonModel {
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="Address_Id")
@@ -31,9 +33,13 @@ public @Data class PersonModel {
 	public String Country;
 	public String Address;
 	public String Profilepic;
+	
+	@ManyToOne
+	public AddressBookModel addressmodel;
+	
 
-	public PersonModel(PersonDTO persondto) {
-		Id = persondto.Id;
+	public void UpdatePersonModel(PersonDTO persondto) {
+		
 		FirstName = persondto.FirstName;
 		LastName = persondto.LastName;
 		Gender = persondto.Gender;
@@ -46,10 +52,11 @@ public @Data class PersonModel {
 		Profilepic = persondto.Profilepic;
 	}
 
-	public void UpdatePerson(PersonDTO persondto) {
-		this.UpdatePerson(persondto);
-	}
 
 	public PersonModel() {
+	}
+	
+	public PersonModel(PersonDTO persondto) {
+		this.UpdatePersonModel(persondto);
 	}
 }
