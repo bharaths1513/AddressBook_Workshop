@@ -21,7 +21,7 @@ import lombok.Data;
 public @Data class AddressBookModel {
 
 	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	public long AddressBookId;
 	public String AddressBookName;
@@ -30,9 +30,9 @@ public @Data class AddressBookModel {
 //	@JoinColumn(name = "id", referencedColumnName = "id")
 //	public List<PersonModel> PersonList;
 	
-	public AddressBookModel(AddressBookDTO addressdto) {
+	public void updateAddressBookModel(AddressBookDTO addressdto) {
 		AddressBookName = addressdto.AddressBookName;
-		AddressBookId = addressdto.AddressBookId;
+//		AddressBookId = addressdto.AddressBookId;
 //		PersonList = addressdto.list;
 	}
 
@@ -40,7 +40,10 @@ public @Data class AddressBookModel {
 	public AddressBookModel() {
 	}
 	
-	
+	public AddressBookModel(AddressBookDTO addressdto) {
+		
+		this.updateAddressBookModel(addressdto);
+	}
 	
 	
 	

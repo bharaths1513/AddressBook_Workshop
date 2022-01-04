@@ -2,6 +2,8 @@ package com.example.Demo.Controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,12 +11,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Demo.DTO.AddressBookDTO;
+import com.example.Demo.DTO.PersonDTO;
 import com.example.Demo.DTO.ResponseDTO;
 import com.example.Demo.Model.AddressBookModel;
 import com.example.Demo.Model.PersonModel;
@@ -28,7 +32,7 @@ public class AddressBookController {
 	private IAddressBookService service;
 	
 	@PostMapping("/AddAddress")
-	public ResponseEntity<ResponseDTO> AddAddressBook(@RequestBody AddressBookDTO addressdto){
+	public ResponseEntity<ResponseDTO> AddAddressBook(@Valid @RequestBody AddressBookDTO addressdto){
 		AddressBookModel model = null;
 		model = service.addaddressbook(addressdto);
 		ResponseDTO respDTO = new ResponseDTO("Added AddressBook ", model);
@@ -56,6 +60,16 @@ public class AddressBookController {
 	public ResponseEntity<ResponseDTO> DeleteAddress(@PathVariable("Id") long Id){
 		service.deleteAddressBook(Id);
 		ResponseDTO respDTO = new ResponseDTO("AddressBook Deleted Successful: ",Id);
+		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);
+	}
+	
+	@PutMapping("/Update/{Id}")
+	public ResponseEntity<ResponseDTO> UpdateAddress(@Valid @PathVariable("Id") long Id,  
+			@RequestBody AddressBookDTO addressdto){
+		AddressBookModel model = null;
+		model = service.UpdateAddressBook(Id, addressdto);
+		System.out.println(model);
+		ResponseDTO respDTO = new ResponseDTO("Updating AddressBook Successful",model);
 		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);
 	}
 }

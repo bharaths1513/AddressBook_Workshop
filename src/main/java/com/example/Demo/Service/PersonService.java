@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.Demo.DTO.PersonDTO;
+import com.example.Demo.Execption.AddressBookException;
 import com.example.Demo.Model.AddressBookModel;
 import com.example.Demo.Model.PersonModel;
 import com.example.Demo.Repository.AddressBookRepository;
@@ -39,7 +40,7 @@ public class PersonService implements IPersonService {
 	@Override
 	public PersonModel GetPersonByID(long Id) {
 
-				return personrepo.findById(Id).get();
+		return personrepo.findById(Id).orElseThrow(() -> new AddressBookException("Person with this id " + Id + " Is not available !"));
 		
 		
 	}

@@ -16,5 +16,5 @@ public interface IAddressBookService {
 	List<AddressBookModel> FindAllPersons();
 	AddressBookModel GetAddressBookById(long Id);
 	void deleteAddressBook(long Id);
-//	AddressBookModel UpdatePerson(long Id,AddressBookDTO addressdto);
+	AddressBookModel UpdateAddressBook(long Id,AddressBookDTO addressdto);
 }

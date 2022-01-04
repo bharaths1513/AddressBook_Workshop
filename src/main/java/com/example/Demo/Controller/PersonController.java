@@ -2,6 +2,9 @@ package com.example.Demo.Controller;
 
 import java.util.List;
 
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +37,7 @@ public class PersonController {
 	 */
 	
 	@PostMapping("/Add")
-	public ResponseEntity<ResponseDTO> AddPerson(@RequestParam long addressId, @RequestBody PersonDTO persondto){
+	public ResponseEntity<ResponseDTO> AddPerson( @RequestParam long addressId,@Valid @RequestBody PersonDTO persondto){
 		PersonModel model = null;
 		model = service.addperson(addressId,persondto);
 		ResponseDTO respDTO = new ResponseDTO("Added Person ", model);
@@ -77,8 +80,8 @@ public class PersonController {
 	 */
 	
 	@PutMapping("/Update/{Id}")
-	public ResponseEntity<ResponseDTO> UpdateAddress(@PathVariable("Id") long Id,  
-			@RequestBody PersonDTO persondto,@RequestParam long addressId){
+	public ResponseEntity<ResponseDTO> UpdateAddress( @PathVariable("Id") long Id,  
+			@Valid @RequestBody PersonDTO persondto,@RequestParam long addressId){
 		PersonModel model = null;
 		model = service.UpdatePerson(Id, persondto);
 		System.out.println(model);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.Demo.DTO.AddressBookDTO;
+import com.example.Demo.Execption.AddressBookException;
 import com.example.Demo.Model.AddressBookModel;
 import com.example.Demo.Model.PersonModel;
 import com.example.Demo.Repository.AddressBookRepository;
@@ -31,7 +32,7 @@ public class AddressBookService implements IAddressBookService {
 
 	@Override
 	public AddressBookModel GetAddressBookById(long Id) {
-		return addressrepo.findById(Id).get();
+		return addressrepo.findById(Id).orElseThrow(() -> new AddressBookException("AddressBook with this id " + Id + " Is not available !"));
 	}
 
 	@Override
@@ -39,6 +40,13 @@ public class AddressBookService implements IAddressBookService {
 		AddressBookModel model = this.GetAddressBookById(Id);
 		addressrepo.delete(model);
 		
+	}
+
+	@Override
+	public AddressBookModel UpdateAddressBook(long Id, AddressBookDTO addressdto) {
+		AddressBookModel model = this.GetAddressBookById(Id);
+		model.updateAddressBookModel(addressdto);
+		return addressrepo.save(model);
 	}
 		
 }
