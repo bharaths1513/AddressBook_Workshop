@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Demo.DTO.PersonDTO;
@@ -33,9 +34,9 @@ public class PersonController {
 	 */
 	
 	@PostMapping("/Add")
-	public ResponseEntity<ResponseDTO> AddPerson(@RequestBody PersonDTO persondto){
+	public ResponseEntity<ResponseDTO> AddPerson(@RequestParam long addressId, @RequestBody PersonDTO persondto){
 		PersonModel model = null;
-		model = service.addperson(persondto);
+		model = service.addperson(addressId,persondto);
 		ResponseDTO respDTO = new ResponseDTO("Added Person ", model);
 		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);
 	}
@@ -46,7 +47,7 @@ public class PersonController {
 	 */
 	
 	@GetMapping("/FindAll")
-	public ResponseEntity<ResponseDTO> GetAddress(){
+	public ResponseEntity<ResponseDTO> GetAddress(@RequestParam long addressId){
 		List<PersonModel> personlist = null;
 		personlist = service.getPersons();
 		ResponseDTO respDTO = new ResponseDTO("Getting All Address Successfully: ",personlist);
@@ -61,7 +62,7 @@ public class PersonController {
 	 */
 	
 	@GetMapping("/Find/{Id}")
-	public ResponseEntity<ResponseDTO> FindAddressById(@PathVariable("Id")long Id){
+	public ResponseEntity<ResponseDTO> FindAddressById(@PathVariable("Id")long Id,@RequestParam long addressId){
 		PersonModel model = null;
 		model = service.GetPersonByID(Id);
 		ResponseDTO respDTO = new ResponseDTO("Getting Address By Id Successful",model);
@@ -77,7 +78,7 @@ public class PersonController {
 	
 	@PutMapping("/Update/{Id}")
 	public ResponseEntity<ResponseDTO> UpdateAddress(@PathVariable("Id") long Id,  
-			@RequestBody PersonDTO persondto){
+			@RequestBody PersonDTO persondto,@RequestParam long addressId){
 		PersonModel model = null;
 		model = service.UpdatePerson(Id, persondto);
 		System.out.println(model);
@@ -92,7 +93,7 @@ public class PersonController {
 	 */
 	
 	@DeleteMapping("/Delete/{Id}")
-	public ResponseEntity<ResponseDTO> DeleteAddress(@PathVariable("Id") long Id){
+	public ResponseEntity<ResponseDTO> DeleteAddress(@PathVariable("Id") long Id,@RequestParam long addressId){
 		service.deleteperson(Id);
 		ResponseDTO respDTO = new ResponseDTO("Deleting Address Successful: ",Id);
 		return new ResponseEntity<ResponseDTO>(respDTO,HttpStatus.OK);

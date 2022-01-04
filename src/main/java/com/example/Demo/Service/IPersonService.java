@@ -10,10 +10,11 @@ import com.example.Demo.Model.PersonModel;
 @Service
 public interface IPersonService {
 
-	PersonModel addperson(PersonDTO persondto);
+//	PersonModel addperson(PersonDTO persondto);
 	PersonModel GetPersonByID(long Id);
 	List<PersonModel> getPersons();
 	PersonModel UpdatePerson(long Id,PersonDTO persondto);
 	void deleteperson(long Id);
+	PersonModel addperson(long addressId, PersonDTO persondto);
 	
 }

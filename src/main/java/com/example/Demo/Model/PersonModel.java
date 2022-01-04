@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -19,7 +20,7 @@ public @Data class PersonModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="Address_Id")
+	@Column(name="address_id")
 	public long Id;
 	
 	@Column(name="name")
@@ -34,7 +35,8 @@ public @Data class PersonModel {
 	public String Address;
 	public String Profilepic;
 	
-	@ManyToOne
+	@ManyToOne()
+	@JoinColumn(name = "id", referencedColumnName = "id")
 	public AddressBookModel addressmodel;
 	
 
@@ -59,4 +61,7 @@ public @Data class PersonModel {
 	public PersonModel(PersonDTO persondto) {
 		this.UpdatePersonModel(persondto);
 	}
+
+
+
 }
